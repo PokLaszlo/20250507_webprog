@@ -12,6 +12,33 @@ const url = 'http://localhost:8000/api/employees'
 
 var addMode = true;
 
+saveButton.addEventListener('click', () => {
+  //JavaScript objektum
+  if(addMode){
+    const emp = {
+      name: nameInput.value,
+      city: cityInput.value,
+      salary: salaryInput.value
+    }
+    addEmployee(emp)
+  }else{
+    const emp = {
+      id: idInput.value,
+      name: nameInput.value,
+      city: cityInput.value,
+      salary: salaryInput.value
+    }
+    updateEmployee(emp)
+  }
+  clearFields()
+})
+
+addButton.addEventListener('click', () => {
+  clearFields()
+  addMode = true;
+  empModalLabel.innerHTML = 'Hozzáadás'
+})
+
 function getEmployees() {
   fetch(url)
   .then((response) => {
@@ -22,8 +49,6 @@ function getEmployees() {
     renderTbody(result.data)
   }); 
 }
-
-getEmployees()
 
 function renderTbody(empList) {
   var tbodyContent = '';
@@ -55,40 +80,7 @@ function renderTbody(empList) {
     tbodyContent += row;
   })
   tbody.innerHTML = tbodyContent
-  
-
 }
-
-/* Create művelet */
-
-saveButton.addEventListener('click', () => {
-  
-  //JavaScript objektum
-
-  if(addMode){
-    const emp = {
-      name: nameInput.value,
-      city: cityInput.value,
-      salary: salaryInput.value
-    }
-    addEmployee(emp)
-  }else{
-    const emp = {
-      id: idInput.value,
-      name: nameInput.value,
-      city: cityInput.value,
-      salary: salaryInput.value
-    }
-    updateEmployee(emp)
-  }
-  clearFields()
-})
-
-addButton.addEventListener('click', () => {
-  clearFields()
-  addMode = true;
-  empModalLabel.innerHTML = 'Hozzáadás'
-})
 
 function clearFields() {
   idInput.value = ''
@@ -98,7 +90,6 @@ function clearFields() {
 }
 
 function addEmployee(emp) {
-  // console.log(emp)
   fetch(url, {
     method: 'post', 
     body: JSON.stringify(emp),
@@ -159,3 +150,4 @@ function updateEmployee(emp){
   })
   .catch(err => console.log(err))
 }
+getEmployees()
