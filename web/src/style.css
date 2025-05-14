@@ -1,0 +1,14 @@
+@media screen and (max-width: 600px) {
+    td {
+        display: block;
+    }
+    th{
+        display: none;
+    }
+    .mini::before{font-weight: bold;display: inline-block;width: 100px;}
+    .miniId::before {content:"id:";float: left;}    
+    .miniName::before {content:"name:";float: left;}    
+    .miniCity::before {content:"city:";float: left;}    
+    .miniSalary::before {content:"salary:";float: left;} 
+    .miniRow{margin-bottom: 20px;display: block;border: 1px solid black ;}   
+}
