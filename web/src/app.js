@@ -1,4 +1,4 @@
-const tbody = document.querySelector('#tbody')
+const cards = document.querySelector('#cards')
 const saveButton = document.querySelector('#saveButton')
 const addButton = document.querySelector('#addButton')
 
@@ -54,30 +54,35 @@ function renderTbody(empList) {
   var tbodyContent = '';
   empList.forEach((emp) => {
     var row = `
-    <tr class="miniRow">
-      <td class="mini miniId">${emp.id}</td>      
-      <td class="mini miniName">${emp.name}</td>      
-      <td class="mini miniCity">${emp.city}</td>      
-      <td class="mini miniSalary">${emp.salary}</td>
-      <td class="mini">
-        <button class="btn btn-warning me-2" 
-        onclick="deleteEmployee(${emp.id})">Törlés</button>
-        <button class="btn btn-secondary"
-        onclick="editEmployee()"
-        data-id="${emp.id}"
-        data-name="${emp.name}"
-        data-city="${emp.city}"
-        data-salary="${emp.salary}"
-        data-bs-toggle="modal" 
-        data-bs-target="#empModal"
-        >Szerkesztés</button>
-      </td>
-
-    </tr>
+      <div class="card m-3" style="width: 18rem;">
+        <div class="card-header">
+          <h2>${emp.name}</h2>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title" id="empCount">Település: ${emp.city}</h5>
+          <p class="card-text">Fizetés: ${emp.salary}</p>
+          <button class="btn btn-warning" 
+            data-id="${emp.id}" 
+            data-name="${emp.name}" 
+            data-city="${emp.city}" 
+            data-salary="${emp.salary}"
+            data-bs-toggle="modal" 
+            data-bs-target="#empModal"
+            onclick="editEmployee()">Szerkesztés</button>
+          <button class="btn btn-danger" 
+            data-id="${emp.id}"  
+            data-name="${emp.name}" 
+            data-city="${emp.city}" 
+            data-salary="${emp.salary}" 
+            data-bs-toggle="modal" 
+            data-bs-target="#empModal"
+            onclick="deleteEmployee(${emp.id})">Törlés</button>
+        </div>
+      </div>
     `;    
     tbodyContent += row;
   })
-  tbody.innerHTML = tbodyContent
+  cards.innerHTML = tbodyContent
 }
 
 function clearFields() {
@@ -149,3 +154,23 @@ function updateEmployee(emp){
   .catch(err => console.log(err))
 }
 getEmployees()
+/* <tr class="miniRow">
+<td class="mini miniId">${emp.id}</td>      
+<td class="mini miniName">${emp.name}</td>      
+<td class="mini miniCity">${emp.city}</td>      
+<td class="mini miniSalary">${emp.salary}</td>
+<td class="mini">
+  <button class="btn btn-warning me-2" 
+  onclick="deleteEmployee(${emp.id})">Törlés</button>
+  <button class="btn btn-secondary"
+  onclick="editEmployee()"
+  data-id="${emp.id}"
+  data-name="${emp.name}"
+  data-city="${emp.city}"
+  data-salary="${emp.salary}"
+  data-bs-toggle="modal" 
+  data-bs-target="#empModal"
+  >Szerkesztés</button>
+</td>
+
+</tr> */

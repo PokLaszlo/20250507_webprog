@@ -12,3 +12,8 @@
     .miniSalary::before {content:"salary:";float: left;} 
     .miniRow{margin-bottom: 20px;display: block;border: 1px solid black ;}   
 }
+#cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
